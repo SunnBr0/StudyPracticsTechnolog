@@ -3,8 +3,7 @@ package src;
 public class Main {
     public static void main(String[] args) {
         // Постановка задачи:
-        // Создать систему, в которой можно было бы регистрировать преподов, студентов и
-        // курсы
+        // Создать систему, в которой можно было бы регистрировать преподов, студентов и курсы
         University university = new University("ВГУ");
 
         Teacher teacher1 = new Teacher("Иван Иванов Иванович", 1);
