@@ -26,6 +26,7 @@ public class Main {
         university.assignTeacherToCourse(teacher1, course1);
         university.assignTeacherToCourse(teacher2, course2);
 
+        
         university.getInfoStudentInCourse();
         university.getInfoTeacherToCourse();
 
