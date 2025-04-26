@@ -29,4 +29,8 @@ public class Student {
     public void enrollCourse(Course course) {
         enrolledCourses.add(course);
     }
+    
+    public void unsubscribeCourse(Course course) {
+        enrolledCourses.remove(course);
+    }
 }

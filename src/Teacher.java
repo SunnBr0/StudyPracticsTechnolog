@@ -29,4 +29,7 @@ public class Teacher {
     public void assignCourse(Course course) {
         teachingCourses.add(course);
     }
+    public void cancelCourse(Course course) {
+        teachingCourses.remove(course);
+    }
 }
