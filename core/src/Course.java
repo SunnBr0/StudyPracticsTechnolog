@@ -1,5 +1,3 @@
-package src;
-
 public class Course {
     private String name;
     private String code;
@@ -22,8 +20,9 @@ public class Course {
     public Teacher getTeacher() {
         return teacher;
     }
+
     @Override
     public String toString() {
-        return name ;
+        return name;
     }
 }

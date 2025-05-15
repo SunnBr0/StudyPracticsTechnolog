@@ -1,5 +1,3 @@
-package src;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +27,7 @@ public class Student {
     public void enrollCourse(Course course) {
         enrolledCourses.add(course);
     }
-    
+
     public void unsubscribeCourse(Course course) {
         enrolledCourses.remove(course);
     }
