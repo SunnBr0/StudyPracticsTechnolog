@@ -3,6 +3,7 @@ public class Main {
         // Постановка задачи:
         // Создать систему, в которой можно было бы регистрировать преподов, студентов и
         // курсы
+        
         University university = new University("ВГУ");
         Teacher teacher1 = new Teacher("Иван Иванов Иванович", 1);
         Teacher teacher2 = new Teacher("Петр Петров Петрович", 2);
