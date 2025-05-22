@@ -85,7 +85,7 @@ public class University {
     }
 
     public void getInfoTeachersAndStudents() {
-        System.out.println("=======================================================");
+        System.out.println("==");
         System.out.println("Университет: " + name);
         for (Student student : students) {
             System.out.println("Студент ");
@@ -101,7 +101,7 @@ public class University {
             System.out.println("Идентификатор учителя: " + teacher.getId());
             System.out.println();
         }
-        System.out.println("=======================================================");
+        System.out.println("==");
     }
 
     public void addFaculty(Faculty faculty) {
@@ -113,7 +113,7 @@ public class University {
     }
 
     public void getInfoFaculties() {
-        System.out.println("=======================================================");
+        System.out.println("==");
         for (Faculty faculty : faculties) {
             System.out.println(faculty);
             System.out.println("Преподаватели: " + faculty.getTeachers());
@@ -121,7 +121,7 @@ public class University {
             System.out.println("Курсы: " + faculty.getCourses());
             System.out.println();
         }
-        System.out.println("=======================================================");
+        System.out.println("==");
 
     }
 

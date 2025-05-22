@@ -14,7 +14,6 @@ public class Main {
         Student student2 = new Student("Пупсень", 2);
         Faculty mathFaculty = new Faculty("Математический факультет");
         Faculty physFaculty = new Faculty("Физикический факультет");
-
         university.addFaculty(mathFaculty);
         university.addFaculty(physFaculty);
         mathFaculty.addTeacher(teacher1);
