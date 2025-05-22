@@ -6,6 +6,7 @@ public class University {
     private List<Teacher> teachers;
     private List<Course> courses;
     private String name;
+    private List<Faculty> faculties = new ArrayList<>();
 
     public University(String name) {
         this.name = name;
@@ -86,6 +87,27 @@ public class University {
             System.out.println();
         }
         System.out.println("=======================================================");
+    }
+
+    public void addFaculty(Faculty faculty) {
+        faculties.add(faculty);
+    }
+
+    public List<Faculty> getFaculties() {
+        return faculties;
+    }
+
+    public void getInfoFaculties() {
+        System.out.println("=======================================================");
+        for (Faculty faculty : faculties) {
+            System.out.println(faculty);
+            System.out.println("Преподаватели: " + faculty.getTeachers());
+            System.out.println("Студенты: " + faculty.getStudents());
+            System.out.println("Курсы: " + faculty.getCourses());
+            System.out.println();
+        }
+        System.out.println("=======================================================");
+
     }
 
 }

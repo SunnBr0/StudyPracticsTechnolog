@@ -31,4 +31,9 @@ public class Teacher {
     public void cancelCourse(Course course) {
         teachingCourses.remove(course);
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }
