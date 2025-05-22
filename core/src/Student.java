@@ -31,4 +31,9 @@ public class Student {
     public void unsubscribeCourse(Course course) {
         enrolledCourses.remove(course);
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }
