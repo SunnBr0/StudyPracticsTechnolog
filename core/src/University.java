@@ -41,10 +41,25 @@ public class University {
 
     public void assignTeacherToCourse(Teacher teacher, Course course) {
         teacher.assignCourse(course);
+        course.setTeacher(teacher);
     }
 
     public void cancelTeacherToCourse(Teacher teacher, Course course) {
         teacher.cancelCourse(course);
+        course.cancelTeacher(teacher);
+
+    }
+
+    public List<Teacher> getTeachers() {
+        return teachers;
+    }
+
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public List<Course> getCourses() {
+        return courses;
     }
 
     public void getInfoStudentInCourse() {
