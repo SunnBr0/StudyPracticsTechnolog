@@ -41,10 +41,25 @@ public class University {
 
     public void assignTeacherToCourse(Teacher teacher, Course course) {
         teacher.assignCourse(course);
+        course.setTeacher(teacher);
     }
 
     public void cancelTeacherToCourse(Teacher teacher, Course course) {
         teacher.cancelCourse(course);
+        course.cancelTeacher(teacher);
+
+    }
+
+    public List<Teacher> getTeachers() {
+        return teachers;
+    }
+
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public List<Course> getCourses() {
+        return courses;
     }
 
     public void getInfoStudentInCourse() {
@@ -70,7 +85,7 @@ public class University {
     }
 
     public void getInfoTeachersAndStudents() {
-        System.out.println("=======================================================");
+        System.out.println("==");
         System.out.println("Университет: " + name);
         for (Student student : students) {
             System.out.println("Студент ");
@@ -86,7 +101,7 @@ public class University {
             System.out.println("Идентификатор учителя: " + teacher.getId());
             System.out.println();
         }
-        System.out.println("=======================================================");
+        System.out.println("==");
     }
 
     public void addFaculty(Faculty faculty) {
@@ -98,7 +113,7 @@ public class University {
     }
 
     public void getInfoFaculties() {
-        System.out.println("=======================================================");
+        System.out.println("==");
         for (Faculty faculty : faculties) {
             System.out.println(faculty);
             System.out.println("Преподаватели: " + faculty.getTeachers());
@@ -106,7 +121,7 @@ public class University {
             System.out.println("Курсы: " + faculty.getCourses());
             System.out.println();
         }
-        System.out.println("=======================================================");
+        System.out.println("==");
 
     }
 
