@@ -1,48 +1,61 @@
+
 pipeline {
     agent any
-    
+
     environment {
-        M2_HOME = "C:\\Program Files\\apache-maven-3.9.9"
-        PATH = "${M2_HOME}/bin;${PATH}"
+        M2_HOME = tool 'maven'
     }
 
     stages {
-        stage("Build") {
+        stage('Checkout') {
             steps {
-                bat 'mvn clean package'
+                checkout scm
             }
         }
-        stage("Tests") {
+
+        stage('Compile') {
+            steps {
+                bat "\"%MAVEN_HOME%\\bin\\mvn\" clean compile test-compile"
+            }
+        }
+
+        stage('Test') {
             when {
-                expression { return env.BRANCH_NAME?.startsWith('feature/') }
+                expression { env.BRANCH_NAME?.startsWith('feature/') }
             }
             steps {
-                bat 'mvn test'
+                bat "\"%MAVEN_HOME%\\bin\\mvn\" test"
             }
         }
-        stage("Checkstyle") {
+
+        stage('Static Analysis') {
             when {
                 branch 'develop'
             }
             steps {
-                bat 'mvn checkstyle:check'
+                bat "\"%MAVEN_HOME%\\bin\\mvn\" checkstyle:check pmd:check"
             }
         }
-        stage("Report") {
-            when {
-                expression { return env.BRANCH_NAME?.startsWith('feature/') }
-            }
+
+        stage('Coverage') {
             steps {
-                junit testResults: '**/surefire-reports/*.xml'
-                jacoco()
+                bat "\"%MAVEN_HOME%\\bin\\mvn\" jacoco:report"
             }
         }
-        stage("Install") {
+
+        stage('Install') {
             steps {
-                bat 'mvn install'
+                bat "\"%MAVEN_HOME%\\bin\\mvn\" install"
             }
         }
-        stage("Publish") {
+
+        stage('Check Coverage') {
+            steps {
+                bat "\"%MAVEN_HOME%\\bin\\mvn\" clean verify"
+            }
+        }
+
+        stage('Publish Artifact') {
             steps {
                 bat '''
                     mkdir deploy || echo
@@ -51,6 +64,17 @@ pipeline {
                 archiveArtifacts artifacts: 'deploy/*.jar', onlyIfSuccessful: true
             }
         }
-        
+    }
+
+    post {
+        always {
+            junit allowEmptyResults: true, testResults: '**/target/surefire-reports/*.xml'
+            
+            // Сохраняем отчеты JaCoCo как артефакты
+            archiveArtifacts artifacts: '**/target/site/jacoco/**', allowEmptyArchive: true
+            
+            // Сохраняем отчеты Checkstyle
+            archiveArtifacts artifacts: '**/target/checkstyle-result.xml', allowEmptyArchive: true
+        }
     }
 }
