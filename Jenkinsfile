@@ -1,39 +1,51 @@
-pipeline{
+pipeline {
     agent any
+    
+    environment {
+        M2_HOME = "/Program Files/apache-maven-3.9.9"
+        PATH = "${M2_HOME}/bin:${PATH}"
+    }
+
     stages {
-        stage("One"){
-            steps{
-                echo "Привет! Это лекция магистров про Jenkins"
+        stage("Build") {
+            steps {
+                sh 'mvn clean package'
             }
         }
-        stage("Two"){
-            steps{
-                input "Будем продолжать выполнение конвейра?"
+        stage("Tests") {
+            when {
+                branch 'feature/*'
+            }
+            steps {
+                sh 'mvn test'
             }
         }
-        stage("Three"){
-            when{
-                not{
-                    branch "develop"
-                }
+        stage("Checkstyle") {
+            when {
+                branch 'develop'
             }
-            steps{
-                echo "Предварительная подготовка"
+            steps {
+                sh 'mvn checkstyle:check'
             }
         }
-        stage("Four"){
-            parallel{
-                stage("Модульные тесты"){
-                    steps{
-                        echo "Test running ...."
-                    }
-                }
-                stage("Интеграционные тексты"){
-                    steps{
-                        echo "Integration test running ...."
-                    }
-                }
+        stage("Report") {
+            when {
+                branch 'feature/*'
             }
+            steps {
+                junit testResults: '**/surefire-reports/*.xml'
+                jacoco()
+            }
+        }
+        stage("Install") {
+            steps {
+                sh 'mvn install'
+            }
+        }
+        stage("Publish") {
+            steps {
+                sh 'cp app/target/app-1.0.0-jar-with-dependencies.jar /VSU UNIVERTY/MagistrPMM/2semestr/CousrePracticsTechnolog && echo "Published"'
+            } 
         }
     }
 }

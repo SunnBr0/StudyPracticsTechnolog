@@ -1,13 +1,14 @@
 public class Main {
     public static void main(String[] args) {
-        // Постановка задачи:
-        // Создать систему, в которой можно было бы регистрировать преподов, студентов и
-        // курсы
-        
+        /*
+         * Постановка задачи:
+         * Создать систему, в которой можно было бы регистрировать преподов,
+         * студентов и курсы
+         */
         University university = new University("ВГУ");
         Teacher teacher1 = new Teacher("Иван Иванов Иванович", 1);
         Teacher teacher2 = new Teacher("Петр Петров Петрович", 2);
-        Course course1 = new Course("Дискретная математика", "MATH101", teacher1);
+        Course course1 = new Course("Дискретный матан", "MATH101", teacher1);
         Course course2 = new Course("Физика", "PHYS101", teacher2);
         Course course3 = new Course("Химия", "CHIM101", teacher2);
         Course course4 = new Course("Инфомартика", "INFO101", teacher2);
