@@ -45,10 +45,12 @@ pipeline {
         stage("Publish") {
             steps {
                 bat '''
-                copy /Y app\\target\\app-1.0.0-jar-with-dependencies.jar "C:\\VSU UNIVERTY\\MagistrPMM\\2semestr\\CousrePracticsTechnolog"
-                echo Published
+                    mkdir deploy || echo
+                    copy "app\\target\\*.jar" deploy
                 '''
+                archiveArtifacts artifacts: 'deploy/*.jar', onlyIfSuccessful: true
             }
         }
+        
     }
 }
