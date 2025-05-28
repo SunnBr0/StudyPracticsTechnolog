@@ -74,7 +74,7 @@ pipeline {
             archiveArtifacts artifacts: '**/target/site/jacoco/**', allowEmptyArchive: true
             
             // Сохраняем отчеты Checkstyle
-            archiveArtifacts artifacts: '**/target/checkstyle-result.xml', allowEmptyArchive: true
+            archiveArtifacts artifacts: '**/target/checkstyle.xml', allowEmptyArchive: true
         }
     }
 }
