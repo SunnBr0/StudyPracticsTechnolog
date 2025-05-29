@@ -14,6 +14,7 @@ public class Main {
         Course course4 = new Course("Инфомартика", "INFO101", teacher2);
         Student student1 = new Student("Вупсень", 1);
         Student student2 = new Student("Пупсень", 2);
+        Student student3 = new Student("Фупсень", 3);
         Faculty mathFaculty = new Faculty("Математический факультет");
         Faculty physFaculty = new Faculty("Физикический факультет");
         university.addFaculty(mathFaculty);
@@ -25,6 +26,7 @@ public class Main {
         physFaculty.addCourse(course2);
         physFaculty.addCourse(course3);
         physFaculty.addStudent(student2);
+        physFaculty.addStudent(student3);
         // Вывести информацию о факультетах
         university.getInfoFaculties();
         university.addTeacher(teacher1);
@@ -35,10 +37,12 @@ public class Main {
         university.addCourse(course4);
         university.addStudent(student1);
         university.addStudent(student2);
+        university.addStudent(student3);
         university.enrollStudentInCourse(student1, course1);
         university.enrollStudentInCourse(student1, course2);
         university.enrollStudentInCourse(student2, course2);
         university.enrollStudentInCourse(student2, course3);
+        university.enrollStudentInCourse(student3, course3);
         university.assignTeacherToCourse(teacher1, course1);
         university.assignTeacherToCourse(teacher1, course2);
         university.assignTeacherToCourse(teacher1, course3);
