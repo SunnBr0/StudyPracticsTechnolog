@@ -21,7 +21,8 @@ pipeline {
                 bat 'mvn test'
             }
         }
-        //4 Запуск статического анализатора (любой из checkstyle, pmd, findbug и др) (только для ветки dev) (mvn или другой вариант)
+        //4 Запуск статического анализатора (любой из checkstyle, pmd, findbug и др)
+        //  (только для ветки dev) (mvn или другой вариант)
         stage("Checkstyle") {
             when {
                 branch 'develop'
