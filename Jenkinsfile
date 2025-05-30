@@ -39,6 +39,7 @@ pipeline {
         // 5 Запуск измерения тестового покрытия (jacoco + mvn или другой)
         stage("5 Test coverage") {
             steps {
+                bat 'mvn test'
                 junit testResults: '**/surefire-reports/*.xml'
                 jacoco()
             }
