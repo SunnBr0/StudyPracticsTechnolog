@@ -6,14 +6,19 @@ pipeline {
     }
 
     stages {
-        // 2 Компиляция кода программы и тестов (mvn)
-        stage("Build") {
+        stage('1 Import project from git') {
             steps {
-                bat 'mvn clean package'
+                checkout scm
+            }
+        }
+        // 2 Компиляция кода программы и тестов (mvn)
+        stage("2 Compile & Test") {
+            steps {
+                bat 'mvn  compile test-compile'
             }
         }
         // 3 Запуск тестов (только для веток feature/XXX) (mvn)
-        stage("Tests") {
+        stage("3 Tests feature/X") {
             when {
                 expression { return env.BRANCH_NAME?.startsWith('feature/') }
             }
@@ -23,7 +28,7 @@ pipeline {
         }
         //4 Запуск статического анализатора (любой из checkstyle, pmd, findbug и др)
         //  (только для ветки dev) (mvn или другой вариант)
-        stage("Checkstyle") {
+        stage("4 Checkstyle") {
             when {
                 branch 'develop'
             }
@@ -32,23 +37,25 @@ pipeline {
             }
         }
         // 5 Запуск измерения тестового покрытия (jacoco + mvn или другой)
-        stage("Report") {
-            when {
-                expression { return env.BRANCH_NAME?.startsWith('feature/') }
-            }
+        stage("5 Test coverage") {
             steps {
                 junit testResults: '**/surefire-reports/*.xml'
                 jacoco()
             }
         }
         // 6 Инсталяция артефактов в локальный репозиторий только при успехе (mvn)
-        stage("Install") {
+        stage("6 Install") {
             steps {
                 bat 'mvn install'
             }
         }
+        stage('7. Check Coverage') {
+            steps {
+                bat "mvn clean verify"
+            }
+        }
         // 8 Публикация (копирование) артефакта в заранее заданную папку (copy)
-        stage("Publish") {
+        stage("8 Publish") {
             steps {
                 bat '''
                     mkdir deploy || echo
@@ -58,5 +65,14 @@ pipeline {
             }
         }
         
+    }
+    post {
+        always {
+            junit allowEmptyResults: true, testResults: '**/target/surefire-reports/*.xml'
+            
+            // Сохраняем отчеты JaCoCo
+            archiveArtifacts artifacts: '**/target/site/jacoco/**', allowEmptyArchive: true
+     
+        }
     }
 }
