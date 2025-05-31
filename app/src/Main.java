@@ -14,7 +14,7 @@ public class Main {
         Course course4 = new Course("Инфомартика", "INFO101", teacher2);
         Student student1 = new Student("Вупсень", 1);
         Student student2 = new Student("Пупсень", 2);
-        Student student3 = new Student("Фупсень", 3);
+        Student student3 = new Student("Петров", 3);
         Faculty mathFaculty = new Faculty("Математический факультет");
         Faculty physFaculty = new Faculty("Физикический факультет");
         university.addFaculty(mathFaculty);
