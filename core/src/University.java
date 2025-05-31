@@ -32,7 +32,10 @@ public class University {
     }
 
     public void enrollStudentInCourse(Student student, Course course) {
-        student.enrollCourse(course);
+        Boolean value = new Secruty().acces(student.getName());
+        if(value){
+            student.enrollCourse(course);
+        }
     }
 
     public void unsubscribeStudentInCourse(Student student, Course course) {
