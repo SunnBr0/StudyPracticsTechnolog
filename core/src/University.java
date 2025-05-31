@@ -33,7 +33,7 @@ public class University {
 
     public void enrollStudentInCourse(Student student, Course course) {
         Boolean value = new Secruty().acces(student.getName());
-        if(value){
+        if(!value){
             student.enrollCourse(course);
         }
     }
